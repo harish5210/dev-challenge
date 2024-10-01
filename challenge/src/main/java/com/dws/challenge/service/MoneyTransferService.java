@@ -3,6 +3,7 @@ package com.dws.challenge.service;
 import com.dws.challenge.domain.Account;
 import com.dws.challenge.exception.InsufficientFundsException;
 import com.dws.challenge.repository.AccountsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -18,6 +19,7 @@ public class MoneyTransferService {
 
     private final Map<String, ReentrantLock> accountLocks = new ConcurrentHashMap<>();
 
+    @Autowired
     public MoneyTransferService(AccountsRepository accountsRepository, NotificationService notificationService) {
         this.accountsRepository = accountsRepository;
         this.notificationService = notificationService;
