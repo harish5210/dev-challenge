@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.dws.challenge.TransferServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-10-01T03:53:37" hostname="HARISH" time="0.071">
+  <properties/>
+  <testcase name="testTransfer()" classname="com.dws.challenge.TransferServiceTest" time="0.071"/>
+  <system-out><![CDATA[09:23:34.876 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.dws.challenge.TransferServiceTest]: TransferServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+09:23:35.019 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.dws.challenge.ChallengeApplication for test class com.dws.challenge.TransferServiceTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::               (v3.2.10)
+
+2024-10-01T09:23:35.400+05:30  INFO 25520 --- [    Test worker] com.dws.challenge.TransferServiceTest    : Starting TransferServiceTest using Java 17.0.6 with PID 25520 (started by haris in C:\Users\haris\Downloads\challenge)
+2024-10-01T09:23:35.401+05:30  INFO 25520 --- [    Test worker] com.dws.challenge.TransferServiceTest    : No active profile set, falling back to 1 default profile: "default"
+2024-10-01T09:23:37.966+05:30  INFO 25520 --- [    Test worker] com.dws.challenge.TransferServiceTest    : Started TransferServiceTest in 2.788 seconds (process running for 3.996)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
