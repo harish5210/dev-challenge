@@ -28,28 +28,36 @@ public class MoneyTransferService {
     public void transfer(String fromAccountId, String toAccountId, BigDecimal amount) {
 
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("Transfer amount must be positive.");
+            throw new IllegalArgumentException("Transfer amount must be positive");
         }
 
         Account accountFrom = accountsRepository.getAccount(fromAccountId);
         Account accountTo = accountsRepository.getAccount(toAccountId);
 
-        if (accountFrom == null || accountTo == null) {
-            throw new IllegalArgumentException("One or both accounts not found.");
+        if (accountFrom == null) {
+            throw new IllegalArgumentException("From Account id " + fromAccountId + " does not exist!");
+        }
+        if (accountTo == null) {
+            throw new IllegalArgumentException("To Account id " + toAccountId + " does not exist!");
         }
 
         // locks for both accounts in a consistent order
         ReentrantLock lock1 = getLock(fromAccountId, toAccountId);
         ReentrantLock lock2 = getLock(toAccountId, fromAccountId);
 
+        boolean lock1Acquired = false;
+        boolean lock2Acquired = false;
+
         try {
             // get both locks
             lock1.lock();
+            lock1Acquired = true;
             lock2.lock();
+            lock2Acquired = true;
 
             // validate if sufficient funds exist in accountFrom
             if (accountFrom.getBalance().compareTo(amount) < 0) {
-                throw new InsufficientFundsException("Insufficient balance in accountFrom");
+                throw new InsufficientFundsException("Insufficient balance in From Account " + accountFrom.getAccountId());
             }
 
             // Perform the transfer
@@ -61,9 +69,13 @@ public class MoneyTransferService {
             notificationService.notifyAboutTransfer(accountTo, "Received " + amount + " from account " + accountFrom.getAccountId());
 
         } finally {
-            // Release both locks
-            lock2.unlock();
-            lock1.unlock();
+            // Release both locks only if acquired and avoid IllegalMonitorStateException
+            if (lock2Acquired) {
+                lock2.unlock();
+            }
+            if (lock1Acquired) {
+                lock1.unlock();
+            }
         }
     }
 

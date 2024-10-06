@@ -30,8 +30,4 @@ public class AccountsService {
     public Account getAccount(String accountId) {
         return this.accountsRepository.getAccount(accountId);
     }
-
-    public void transfer(String fromAccountId, String toAccountId, BigDecimal amount) {
-        this.moneyTransferService.transfer(fromAccountId, toAccountId, amount);
-    }
 }
